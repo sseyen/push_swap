@@ -6,32 +6,47 @@
 /*   By: alisseye <alisseye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 18:29:11 by alisseye          #+#    #+#             */
-/*   Updated: 2024/11/20 16:25:28 by alisseye         ###   ########.fr       */
+/*   Updated: 2024/11/25 17:19:20 by alisseye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static t_stack	*args_to_stack(int argc, char **argv)
+static void	print_stack(t_list **stack)
 {
-	t_stack	*stack;
+	t_list	*tmp;
+
+	tmp = *stack;
+	while (tmp)
+	{
+		ft_putnbr_fd(*(int *)tmp->content, 1);
+		ft_putchar_fd('\n', 1);
+		tmp = tmp->next;
+	}
+}
+
+static t_list	**get_stack(int argc, char **argv)
+{
+	t_list	**stack;
+	t_list	*new_node;
 	int		i;
 
-	stack = malloc(sizeof(t_stack));
+	stack = malloc(sizeof(t_list *));
 	if (!stack)
 		return (NULL);
-	stack->size = argc - 1;
-	stack->stack = malloc(sizeof(int) * stack->size);
-	if (!stack->stack)
+	*stack = NULL;
+	i = argc - 1;
+	while (i > 0)
 	{
-		free(stack);
-		return (NULL);
-	}
-	i = 1;
-	while (i < argc)
-	{
-		stack->stack[i - 1] = ft_atoi(argv[i]);
-		i++;
+		new_node = get_new_node(ft_atoi(argv[i]));
+		if (!new_node)
+		{
+			ft_lstclear(stack, NULL);
+			free(stack);
+			return (NULL);
+		}
+		ft_lstadd_front(stack, new_node);
+		i--;
 	}
 	return (stack);
 }
@@ -67,19 +82,21 @@ static int	validate_input(int argc, char **argv)
 
 int	main(int argc, char **argv)
 {
-	t_stack	*stack;
+	t_list	**stack;
 
-	if (!validate_input(argc, argv))
+	if (!validate_input(argc, argv) || argc == 1)
 	{
 		ft_putstr_fd("Error\n", 2);
 		return (1);
 	}
-	stack = args_to_stack(argc, argv);
+	stack = get_stack(argc, argv);
 	if (!stack)
 	{
 		ft_putstr_fd("Error\n", 2);
 		return (1);
 	}
-	// push_swap(stack);
+	print_stack(stack);
+	ft_lstclear(stack, free);
+	free(stack);
 	return (0);
 }
