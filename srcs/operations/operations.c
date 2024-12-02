@@ -6,7 +6,7 @@
 /*   By: alisseye <alisseye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:31:37 by alisseye          #+#    #+#             */
-/*   Updated: 2024/11/25 17:39:20 by alisseye         ###   ########.fr       */
+/*   Updated: 2024/12/02 16:03:07 by alisseye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	swap(t_list **stack)
 	*stack = tmp;
 }
 
+// left rotate
 // 1 2 3 4 5
 // 2 3 4 5 1
 void	rotate(t_list **stack)
@@ -54,6 +55,7 @@ void	rotate(t_list **stack)
 	tmp->next = NULL;
 }
 
+// right rotate
 // 1 2 3 4 5
 // 5 1 2 3 4
 void	reverse_rotate(t_list **stack)
@@ -70,4 +72,10 @@ void	reverse_rotate(t_list **stack)
 	last->next = NULL;
 	tmp->next = *stack;
 	*stack = tmp;
+}
+
+void	double_func(void (*f)(t_list **), t_list **a, t_list **b)
+{
+	f(a);
+	f(b);
 }

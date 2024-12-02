@@ -6,7 +6,7 @@
 /*   By: alisseye <alisseye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 18:29:11 by alisseye          #+#    #+#             */
-/*   Updated: 2024/11/25 17:19:20 by alisseye         ###   ########.fr       */
+/*   Updated: 2024/12/02 17:27:42 by alisseye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,21 +82,29 @@ static int	validate_input(int argc, char **argv)
 
 int	main(int argc, char **argv)
 {
-	t_list	**stack;
+	t_list	**stack_a;
+	t_list	**stack_b;
 
-	if (!validate_input(argc, argv) || argc == 1)
+	if (argc == 1 || !validate_input(argc, argv))
 	{
 		ft_putstr_fd("Error\n", 2);
 		return (1);
 	}
-	stack = get_stack(argc, argv);
-	if (!stack)
+	stack_a = get_stack(argc, argv);
+	if (!stack_a)
 	{
 		ft_putstr_fd("Error\n", 2);
 		return (1);
 	}
-	print_stack(stack);
-	ft_lstclear(stack, free);
-	free(stack);
+	stack_b = malloc(sizeof(t_list *));
+	if (!stack_b)
+	{
+		ft_lstclear(stack_a, free);
+		free(stack_a);
+		ft_putstr_fd("Error\n", 2);
+		return (1);
+	}
+	push_swap(stack_a, stack_b);
+	free_stacks(stack_a, stack_b);
 	return (0);
 }
