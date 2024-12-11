@@ -6,7 +6,7 @@
 /*   By: alisseye <alisseye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:22:05 by alisseye          #+#    #+#             */
-/*   Updated: 2024/12/02 18:12:23 by alisseye         ###   ########.fr       */
+/*   Updated: 2024/12/11 01:01:19 by alisseye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,13 @@ void	push_swap(t_list **stack_a, t_list **stack_b)
 	if (size == 1 || size == 0 || is_sorted(*stack_a))
 		return ;
 	if (size == 2)
+	{
 		if (*(int *)(*stack_a)->content > *(int *)(*stack_a)->next->content)
 			sa(stack_a);
+	}
+	else if (size == 3)
+		sort_three(stack_a);
 	else
-		chunk_sort(stack_a, stack_b, size);
+		sort_stack(stack_a, stack_b);
+	free_stacks(stack_a, stack_b);
 }

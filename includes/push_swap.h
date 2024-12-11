@@ -6,7 +6,7 @@
 /*   By: alisseye <alisseye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 18:30:15 by alisseye          #+#    #+#             */
-/*   Updated: 2024/12/02 20:10:05 by alisseye         ###   ########.fr       */
+/*   Updated: 2024/12/11 01:00:53 by alisseye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,16 @@
 // push_swap
 void	push_swap(t_list **stack_a, t_list **stack_b);
 
+// Sort algorithms
+void	sort_three(t_list **stack_a);
+void	sort_stack(t_list **stack_a, t_list **stack_b);
+
 // Utils
 t_list	*get_new_node(int content);
 void	free_stacks(t_list **a, t_list **b);
+void	free_tab(char **split);
+int		get_size(char **argv);
+char	**copy_args(int argc, char **argv);
 
 // Operations
 void	push(t_list **dst, t_list **src);
@@ -42,9 +49,5 @@ void	rr(t_list **a, t_list **b);
 void	rra(t_list **a);
 void	rrb(t_list **b);
 void	rrr(t_list **a, t_list **b);
-
-// Math
-int	ft_log2(double n);
-int	ft_ceil(double n);
 
 #endif

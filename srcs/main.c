@@ -6,26 +6,13 @@
 /*   By: alisseye <alisseye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 18:29:11 by alisseye          #+#    #+#             */
-/*   Updated: 2024/12/02 17:27:42 by alisseye         ###   ########.fr       */
+/*   Updated: 2024/12/05 18:19:23 by alisseye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	print_stack(t_list **stack)
-{
-	t_list	*tmp;
-
-	tmp = *stack;
-	while (tmp)
-	{
-		ft_putnbr_fd(*(int *)tmp->content, 1);
-		ft_putchar_fd('\n', 1);
-		tmp = tmp->next;
-	}
-}
-
-static t_list	**get_stack(int argc, char **argv)
+static t_list	**get_stack(int argc, char **args)
 {
 	t_list	**stack;
 	t_list	*new_node;
@@ -36,9 +23,9 @@ static t_list	**get_stack(int argc, char **argv)
 		return (NULL);
 	*stack = NULL;
 	i = argc - 1;
-	while (i > 0)
+	while (i >= 0)
 	{
-		new_node = get_new_node(ft_atoi(argv[i]));
+		new_node = get_new_node(ft_atoi(args[i]));
 		if (!new_node)
 		{
 			ft_lstclear(stack, NULL);
@@ -51,27 +38,42 @@ static t_list	**get_stack(int argc, char **argv)
 	return (stack);
 }
 
-static int	validate_input(int argc, char **argv)
+static int	init_stacks(t_list ***a, t_list ***b, int argc, char **args)
+{
+	*a = get_stack(argc, args);
+	if (!(*a))
+		return (0);
+	*b = malloc(sizeof(t_list *));
+	if (!(*b))
+	{
+		ft_lstclear(*a, NULL);
+		free(*a);
+		return (0);
+	}
+	return (1);
+}
+
+static int	validate_input(int argc, char **args)
 {
 	int	i;
 	int	j;
 
-	i = 1;
+	i = 0;
 	while (i < argc)
 	{
 		j = 0;
-		while (argv[i][j])
+		while (args[i][j])
 		{
-			if (j == 0 && (argv[i][j] == '-' || argv[i][j] == '+'))
+			if (j == 0 && (args[i][j] == '-' || args[i][j] == '+'))
 				j++;
-			if (!ft_isdigit(argv[i][j]))
+			if (!ft_isdigit(args[i][j]))
 				return (0);
 			j++;
 		}
 		j = 0;
 		while (j < i)
 		{
-			if (ft_atoi(argv[j]) == ft_atoi(argv[i]))
+			if (ft_atoi(args[j]) == ft_atoi(args[i]))
 				return (0);
 			j++;
 		}
@@ -80,31 +82,44 @@ static int	validate_input(int argc, char **argv)
 	return (1);
 }
 
+char	**get_args(int argc, char **argv)
+{
+	char	**args;
+
+	if (argc == 1)
+		return (NULL);
+	if (argc == 2)
+		args = ft_split(argv[1], ' ');
+	else
+		args = copy_args(argc, argv);
+	return (args);
+}
+
 int	main(int argc, char **argv)
 {
 	t_list	**stack_a;
 	t_list	**stack_b;
+	char	**args;
+	int		args_count;
 
-	if (argc == 1 || !validate_input(argc, argv))
+	args = get_args(argc, argv);
+	args_count = 0;
+	while (args && args[args_count])
+		args_count++;
+	if (!args || !validate_input(args_count, args))
+	{
+		free_tab(args);
+		ft_putstr_fd("Error\n", 2);
+		return (1);
+	}
+	stack_a = NULL;
+	stack_b = NULL;
+	if (!init_stacks(&stack_a, &stack_b, args_count, args))
 	{
 		ft_putstr_fd("Error\n", 2);
 		return (1);
 	}
-	stack_a = get_stack(argc, argv);
-	if (!stack_a)
-	{
-		ft_putstr_fd("Error\n", 2);
-		return (1);
-	}
-	stack_b = malloc(sizeof(t_list *));
-	if (!stack_b)
-	{
-		ft_lstclear(stack_a, free);
-		free(stack_a);
-		ft_putstr_fd("Error\n", 2);
-		return (1);
-	}
+	free_tab(args);
 	push_swap(stack_a, stack_b);
-	free_stacks(stack_a, stack_b);
 	return (0);
 }
