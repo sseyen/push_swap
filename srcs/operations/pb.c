@@ -1,36 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   math.c                                             :+:      :+:    :+:   */
+/*   pb.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alisseye <alisseye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/02 20:08:04 by alisseye          #+#    #+#             */
-/*   Updated: 2024/12/02 20:09:30 by alisseye         ###   ########.fr       */
+/*   Created: 2024/12/04 10:30:53 by alisseye          #+#    #+#             */
+/*   Updated: 2024/12/04 10:31:31 by alisseye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_log2(double n)
+void	pb(t_list **a, t_list **b)
 {
-	int	res;
-
-	res = 0;
-	while (n > 1)
-	{
-		n /= 2;
-		res++;
-	}
-	return (res);
-}
-
-int	ft_ceil(double n)
-{
-	int	res;
-
-	res = (int)n;
-	if (n > res)
-		res++;
-	return (res);
+	push(b, a);
+	ft_putstr_fd("pb\n", 1);
 }

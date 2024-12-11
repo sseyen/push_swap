@@ -6,13 +6,22 @@
 #    By: alisseye <alisseye@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/18 18:25:25 by alisseye          #+#    #+#              #
-#    Updated: 2024/11/25 17:21:13 by alisseye         ###   ########.fr        #
+#    Updated: 2024/12/11 00:59:52 by alisseye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 
-SRCS = srcs/main.c srcs/utils.c srcs/operations.c \
+OPS = srcs/operations/operations.c \
+	srcs/operations/pa.c srcs/operations/pb.c \
+	srcs/operations/ra.c srcs/operations/rb.c \
+	srcs/operations/rr.c srcs/operations/rra.c \
+	srcs/operations/rrb.c srcs/operations/rrr.c \
+	srcs/operations/sa.c srcs/operations/sb.c \
+	srcs/operations/ss.c
+
+SRCS = srcs/main.c srcs/utils.c ${OPS} \
+	srcs/push_swap.c srcs/sort.c \
 
 OBJS = $(SRCS:.c=.o)
 
