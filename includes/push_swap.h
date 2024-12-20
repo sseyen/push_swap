@@ -6,7 +6,7 @@
 /*   By: alisseye <alisseye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 18:30:15 by alisseye          #+#    #+#             */
-/*   Updated: 2024/12/20 18:33:20 by alisseye         ###   ########.fr       */
+/*   Updated: 2024/12/20 20:21:03 by alisseye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,24 @@
 # include "libft.h"
 # include <stdio.h>
 
+typedef struct s_move_cost
+{
+	int	value;
+	int	ra;
+	int	rra;
+	int	rb;
+	int	rrb;
+	int	total;
+}	t_move_cost;
+
 // push_swap
-void	push_swap(t_list **stack_a, t_list **stack_b);
+int		push_swap(t_list **stack_a, t_list **stack_b);
 int		is_sorted(t_list *stack);
 
 // Sort algorithms
 void	sort_three(t_list **stack_a);
-void	sort(t_list **stack_a, t_list **stack_b, int size);
+void	move_to_b(t_list **stack_a, t_list **stack_b, int size);
+int		move_to_a(t_list **stack_a, t_list **stack_b);
 
 // Utils
 t_list	*get_new_node(int content);
