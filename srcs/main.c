@@ -6,7 +6,7 @@
 /*   By: alisseye <alisseye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 18:29:11 by alisseye          #+#    #+#             */
-/*   Updated: 2024/12/05 18:19:23 by alisseye         ###   ########.fr       */
+/*   Updated: 2024/12/20 20:20:52 by alisseye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,5 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	free_tab(args);
-	push_swap(stack_a, stack_b);
-	return (0);
+	return (push_swap(stack_a, stack_b));
 }

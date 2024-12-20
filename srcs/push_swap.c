@@ -6,7 +6,7 @@
 /*   By: alisseye <alisseye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:22:05 by alisseye          #+#    #+#             */
-/*   Updated: 2024/12/20 18:51:23 by alisseye         ###   ########.fr       */
+/*   Updated: 2024/12/20 20:20:39 by alisseye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	is_sorted(t_list *stack)
 	return (1);
 }
 
-void	push_swap(t_list **stack_a, t_list **stack_b)
+int	push_swap(t_list **stack_a, t_list **stack_b)
 {
 	int	size;
 
@@ -79,7 +79,12 @@ void	push_swap(t_list **stack_a, t_list **stack_b)
 			sort_three(stack_a);
 		else if (ft_lstsize(*stack_a) == 2)
 			sort_two(stack_a);
-		move_to_a(stack_a, stack_b, size);
+		if (move_to_a(stack_a, stack_b) == 1)
+		{
+			free_stacks(stack_a, stack_b);
+			return (1);
+		}
 	}
 	free_stacks(stack_a, stack_b);
+	return (0);
 }
