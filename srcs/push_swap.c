@@ -6,13 +6,13 @@
 /*   By: alisseye <alisseye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:22:05 by alisseye          #+#    #+#             */
-/*   Updated: 2024/12/20 20:20:39 by alisseye         ###   ########.fr       */
+/*   Updated: 2025/02/17 01:42:58 by alisseye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sort_three(t_list **stack_a)
+static void	sort_three(t_list **stack_a)
 {
 	int	first;
 	int	second;
@@ -39,26 +39,10 @@ void	sort_three(t_list **stack_a)
 		rra(stack_a);
 }
 
-void	sort_two(t_list **stack_a)
+static void	sort_two(t_list **stack_a)
 {
 	if (*(int *)(*stack_a)->content > *(int *)(*stack_a)->next->content)
 		sa(stack_a);
-}
-
-int	is_sorted(t_list *stack)
-{
-	t_list	*tmp;
-
-	if (!stack || !stack->next)
-		return (1);
-	tmp = stack;
-	while (tmp->next)
-	{
-		if (*(int *)tmp->content > *(int *)tmp->next->content)
-			return (0);
-		tmp = tmp->next;
-	}
-	return (1);
 }
 
 int	push_swap(t_list **stack_a, t_list **stack_b)
@@ -67,18 +51,19 @@ int	push_swap(t_list **stack_a, t_list **stack_b)
 
 	size = ft_lstsize(*stack_a);
 	if (size == 1 || size == 0 || is_sorted(*stack_a))
-		return ;
+	{
+		free_stacks(stack_a, stack_b);
+		return (0);
+	}
 	if (size == 2)
 		sort_two(stack_a);
 	else if (size == 3)
 		sort_three(stack_a);
 	else
 	{
-		move_to_b(stack_a, stack_b, size);
-		if (ft_lstsize(*stack_a) == 3)
+		move_to_b(stack_a, stack_b);
+		if (!is_sorted(*stack_a))
 			sort_three(stack_a);
-		else if (ft_lstsize(*stack_a) == 2)
-			sort_two(stack_a);
 		if (move_to_a(stack_a, stack_b) == 1)
 		{
 			free_stacks(stack_a, stack_b);

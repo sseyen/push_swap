@@ -6,7 +6,7 @@
 /*   By: alisseye <alisseye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 18:29:11 by alisseye          #+#    #+#             */
-/*   Updated: 2024/12/20 20:20:52 by alisseye         ###   ########.fr       */
+/*   Updated: 2025/02/11 23:08:22 by alisseye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static int	validate_input(int argc, char **args)
 		{
 			if (j == 0 && (args[i][j] == '-' || args[i][j] == '+'))
 				j++;
-			if (!ft_isdigit(args[i][j]))
+			if (!ft_isdigit(args[i][j])) // INT_MIN <= arg <= INT_MAX
 				return (0);
 			j++;
 		}
@@ -114,7 +114,7 @@ int	main(int argc, char **argv)
 	}
 	stack_a = NULL;
 	stack_b = NULL;
-	if (!init_stacks(&stack_a, &stack_b, args_count, args))
+	if (!init_stacks(&stack_a, &stack_b, args_count, args)) // without 3rd*, then without &
 	{
 		ft_putstr_fd("Error\n", 2);
 		return (1);

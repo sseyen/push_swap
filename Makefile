@@ -6,7 +6,7 @@
 #    By: alisseye <alisseye@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/18 18:25:25 by alisseye          #+#    #+#              #
-#    Updated: 2024/12/18 11:23:24 by alisseye         ###   ########.fr        #
+#    Updated: 2025/02/13 22:19:25 by alisseye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,9 @@ OPS = srcs/operations/operations.c \
 	srcs/operations/ss.c
 
 SRCS = srcs/main.c srcs/utils.c ${OPS} \
-	srcs/push_swap.c srcs/sort.c
+	srcs/push_swap.c srcs/sort.c \
+	srcs/calculate_moves.c srcs/utils_moves.c \
+	srcs/utils_sort.c
 
 OBJS = $(SRCS:.c=.o)
 

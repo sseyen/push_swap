@@ -6,63 +6,35 @@
 /*   By: alisseye <alisseye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 19:08:47 by alisseye          #+#    #+#             */
-/*   Updated: 2024/12/20 20:26:05 by alisseye         ###   ########.fr       */
+/*   Updated: 2025/02/17 01:44:05 by alisseye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	get_avg(t_list *stack, int size)
+static void	execute_moves(t_move_cost *cheapest, t_list **stack_a, t_list **stack_b)
 {
-	long long	sum;
-
-	sum = 0;
-	while (stack)
+	while (cheapest->ra > 0 && cheapest->rb > 0)
 	{
-		sum += *(int *)(stack->content);
-		stack = stack->next;
+		rr(stack_a, stack_b);
+		cheapest->ra--;
+		cheapest->rb--;
 	}
-	return ((int)(sum / size));
-}
-
-void	*calculate_cost(t_list *stack_a, t_list *stack_b)
-{
-	t_move_cost *cost;
-
-	cost = malloc(sizeof(t_move_cost));
-	if (!cost)
-		return (NULL);
-}
-
-t_move_cost	*get_cheapest(t_list *stack_a, t_list *stack_b)
-{
-	t_move_cost	*cheapest;
-	t_move_cost	*tmp;
-
-	cheapest = calculate_cost(stack_a, stack_b);
-	if (!cheapest)
-		return (NULL);
-	while (stack_b)
+	while (cheapest->ra-- > 0)
+		ra(stack_a);
+	while (cheapest->rb-- > 0)
+		rb(stack_b);
+	while (cheapest->rra > 0 && cheapest->rrb > 0)
 	{
-		tmp = calculate_cost(stack_a, stack_b);
-		if (!tmp)
-		{
-			free(cheapest);
-			return (NULL);
-		}
-		if (tmp->total < cheapest->total)
-		{
-			cheapest->value = tmp->value;
-			cheapest->ra = tmp->ra;
-			cheapest->rra = tmp->rra;
-			cheapest->rb = tmp->rb;
-			cheapest->rrb = tmp->rrb;
-			cheapest->total = tmp->total;
-		}
-		stack_b = stack_b->next;
-		free(tmp);
+		rrr(stack_a, stack_b);
+		cheapest->rra--;
+		cheapest->rrb--;
 	}
-	return (cheapest);
+	while (cheapest->rra-- > 0)
+		rra(stack_a);
+	while (cheapest->rrb-- > 0)
+		rrb(stack_b);
+	pa(stack_a, stack_b);
 }
 
 int	move_to_a(t_list **stack_a, t_list **stack_b)
@@ -71,7 +43,7 @@ int	move_to_a(t_list **stack_a, t_list **stack_b)
 
 	while (*stack_b)
 	{
-		cheapest = get_cheapest(*stack_a, *stack_b);
+		cheapest = get_cheapest(*stack_a, *stack_b, ft_lstsize(*stack_b));
 		if (!cheapest)
 		{
 			ft_putstr_fd("Error\n", 2);
@@ -79,25 +51,27 @@ int	move_to_a(t_list **stack_a, t_list **stack_b)
 		}
 		execute_moves(cheapest, stack_a, stack_b);
 	}
+	move_to_top(stack_a);
 	free(cheapest);
 	return (0);
 }
 
-void	move_to_b(t_list **stack_a, t_list **stack_b, int size)
+void	move_to_b(t_list **stack_a, t_list **stack_b)
 {
 	int	avg;
 	int	i;
 
-	if (size <= 3)
-		return ;
-	avg = get_avg(*stack_a, size);
-	i = size;
-	while (i--)
+	while (stack_a && *stack_a && ft_lstsize(*stack_a) > 3)
 	{
-		if (*(int *)(*stack_a)->content < avg)
-			pb(stack_a, stack_b);
-		else
-			ra(stack_a);
+		avg = get_avg(*stack_a, ft_lstsize(*stack_a));
+		i = ft_lstsize(*stack_a);
+		while (i-- && ft_lstsize(*stack_a) > 3 && !is_sorted(*stack_a) \
+			&& contain_smaller(*stack_a, avg))
+		{
+			if (*(int *)(*stack_a)->content < avg)
+				pb(stack_a, stack_b);
+			else
+				ra(stack_a);
+		}
 	}
-	sort(stack_a, stack_b, ft_lstsize(*stack_a));
 }
