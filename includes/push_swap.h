@@ -6,7 +6,7 @@
 /*   By: alisseye <alisseye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 18:30:15 by alisseye          #+#    #+#             */
-/*   Updated: 2025/02/17 01:43:18 by alisseye         ###   ########.fr       */
+/*   Updated: 2025/02/17 13:33:04 by alisseye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "libft.h"
 # include <stdio.h>
+# include <limits.h>
 
 typedef struct s_move_cost
 {
@@ -34,9 +35,11 @@ void		move_to_b(t_list **stack_a, t_list **stack_b);
 int			move_to_a(t_list **stack_a, t_list **stack_b);
 
 // Calculate moves
-t_move_cost	*calculate_cost(t_list *stack_a, t_list *stack_b, int value, int size);
+t_move_cost	*calculate_cost(t_list *stack_a, t_list *stack_b, \
+							int value, int size);
 
 // Utils
+int			is_int(int n);
 t_list		*get_new_node(int content);
 void		free_stacks(t_list **a, t_list **b);
 void		free_tab(char **split);

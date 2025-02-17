@@ -6,13 +6,14 @@
 /*   By: alisseye <alisseye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 19:08:47 by alisseye          #+#    #+#             */
-/*   Updated: 2025/02/17 01:44:05 by alisseye         ###   ########.fr       */
+/*   Updated: 2025/02/17 12:53:38 by alisseye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	execute_moves(t_move_cost *cheapest, t_list **stack_a, t_list **stack_b)
+static void	execute_moves(t_move_cost *cheapest, \
+						t_list **stack_a, t_list **stack_b)
 {
 	while (cheapest->ra > 0 && cheapest->rb > 0)
 	{
@@ -61,7 +62,8 @@ void	move_to_b(t_list **stack_a, t_list **stack_b)
 	int	avg;
 	int	i;
 
-	while (stack_a && *stack_a && ft_lstsize(*stack_a) > 3)
+	while (stack_a && *stack_a && ft_lstsize(*stack_a) > 3 \
+		&& !is_sorted(*stack_a))
 	{
 		avg = get_avg(*stack_a, ft_lstsize(*stack_a));
 		i = ft_lstsize(*stack_a);

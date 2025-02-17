@@ -6,7 +6,7 @@
 /*   By: alisseye <alisseye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 23:31:13 by alisseye          #+#    #+#             */
-/*   Updated: 2025/02/17 01:26:06 by alisseye         ###   ########.fr       */
+/*   Updated: 2025/02/17 12:36:34 by alisseye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,8 @@ t_move_cost	*calculate_cost(t_list *stack_a, t_list *stack_b, \
 	cost->rb = 0;
 	cost->rrb = 0;
 	cost->total = 0;
-	get_b_moves(stack_b, *(int *)stack_b->content, cost, size);
-	get_a_moves(stack_a, *(int *)stack_b->content, cost);
+	get_b_moves(stack_b, value, cost, size);
+	get_a_moves(stack_a, value, cost);
 	get_total_moves(cost);
 	return (cost);
 }
