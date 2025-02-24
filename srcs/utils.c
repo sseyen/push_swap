@@ -6,7 +6,7 @@
 /*   By: alisseye <alisseye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:10:41 by alisseye          #+#    #+#             */
-/*   Updated: 2024/12/04 14:16:31 by alisseye         ###   ########.fr       */
+/*   Updated: 2025/02/24 14:59:12 by alisseye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,7 @@ char	**copy_args(int argc, char **argv)
 void	free_stacks(t_list **a, t_list **b)
 {
 	ft_lstclear(a, free);
-	free(a);
 	ft_lstclear(b, free);
-	free(b);
 }
 
 t_list	*get_new_node(int content)

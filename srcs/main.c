@@ -6,51 +6,32 @@
 /*   By: alisseye <alisseye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 18:29:11 by alisseye          #+#    #+#             */
-/*   Updated: 2025/02/17 13:34:59 by alisseye         ###   ########.fr       */
+/*   Updated: 2025/02/24 15:04:28 by alisseye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static t_list	**get_stack(int argc, char **args)
+static t_list	*init_stack(int argc, char **args)
 {
-	t_list	**stack;
+	t_list	*stack;
 	t_list	*new_node;
 	int		i;
 
-	stack = malloc(sizeof(t_list *));
-	if (!stack)
-		return (NULL);
-	*stack = NULL;
+	stack = NULL;
 	i = argc - 1;
 	while (i >= 0)
 	{
 		new_node = get_new_node(ft_atoi(args[i]));
 		if (!new_node)
 		{
-			ft_lstclear(stack, NULL);
-			free(stack);
+			ft_lstclear(&stack, NULL);
 			return (NULL);
 		}
-		ft_lstadd_front(stack, new_node);
+		ft_lstadd_front(&stack, new_node);
 		i--;
 	}
 	return (stack);
-}
-
-static int	init_stacks(t_list ***a, t_list ***b, int argc, char **args)
-{
-	*a = get_stack(argc, args);
-	if (!(*a))
-		return (0);
-	*b = malloc(sizeof(t_list *));
-	if (!(*b))
-	{
-		ft_lstclear(*a, NULL);
-		free(*a);
-		return (0);
-	}
-	return (1);
 }
 
 static int	validate_input(int argc, char **args)
@@ -97,8 +78,8 @@ char	**get_args(int argc, char **argv)
 
 int	main(int argc, char **argv)
 {
-	t_list	**stack_a;
-	t_list	**stack_b;
+	t_list	*stack_a;
+	t_list	*stack_b;
 	char	**args;
 	int		args_count;
 
@@ -112,13 +93,14 @@ int	main(int argc, char **argv)
 		ft_putstr_fd("Error\n", 2);
 		return (1);
 	}
-	stack_a = NULL;
-	stack_b = NULL;
-	if (!init_stacks(&stack_a, &stack_b, args_count, args))
+	stack_a = init_stack(args_count, args);
+	if (!stack_a)
 	{
+		free_tab(args);
 		ft_putstr_fd("Error\n", 2);
 		return (1);
 	}
+	stack_b = NULL;
 	free_tab(args);
-	return (push_swap(stack_a, stack_b));
+	return (push_swap(&stack_a, &stack_b));
 }

@@ -6,7 +6,7 @@
 /*   By: alisseye <alisseye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 21:50:12 by alisseye          #+#    #+#             */
-/*   Updated: 2025/02/17 12:54:34 by alisseye         ###   ########.fr       */
+/*   Updated: 2025/02/24 15:23:46 by alisseye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,14 +92,15 @@ t_move_cost	*get_cheapest(t_list *stack_a, t_list *stack_b, int size)
 	{
 		tmp = calculate_cost(stack_a, stack_b, *(int *)tmp_b->content, size);
 		if (!tmp)
+			return (free(cheapest), NULL);
+		if (tmp->total < cheapest->total)
 		{
 			free(cheapest);
-			return (NULL);
+			cheapest = tmp;
 		}
-		if (tmp->total < cheapest->total)
-			copy_moves_data(cheapest, tmp);
+		else
+			free(tmp);
 		tmp_b = tmp_b->next;
-		free(tmp);
 	}
 	return (cheapest);
 }

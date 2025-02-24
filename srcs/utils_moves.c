@@ -6,7 +6,7 @@
 /*   By: alisseye <alisseye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 23:28:02 by alisseye          #+#    #+#             */
-/*   Updated: 2025/02/14 00:14:54 by alisseye         ###   ########.fr       */
+/*   Updated: 2025/02/24 15:19:30 by alisseye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	copy_moves_data(t_move_cost	*dest, t_move_cost *src)
 	dest->rb = src->rb;
 	dest->rrb = src->rrb;
 	dest->total = src->total;
-	return ;
 }
 
 int	ft_max(int a, int b)

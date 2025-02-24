@@ -6,7 +6,7 @@
 /*   By: alisseye <alisseye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 19:08:47 by alisseye          #+#    #+#             */
-/*   Updated: 2025/02/17 12:53:38 by alisseye         ###   ########.fr       */
+/*   Updated: 2025/02/24 15:26:33 by alisseye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ int	move_to_a(t_list **stack_a, t_list **stack_b)
 			return (1);
 		}
 		execute_moves(cheapest, stack_a, stack_b);
+		free(cheapest);
 	}
 	move_to_top(stack_a);
-	free(cheapest);
 	return (0);
 }
 
