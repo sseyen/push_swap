@@ -6,7 +6,7 @@
 /*   By: alisseye <alisseye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 18:29:11 by alisseye          #+#    #+#             */
-/*   Updated: 2025/02/24 15:04:28 by alisseye         ###   ########.fr       */
+/*   Updated: 2025/03/01 18:33:05 by alisseye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@ static t_list	*init_stack(int argc, char **args)
 		i--;
 	}
 	return (stack);
+}
+
+static int	is_int(int n)
+{
+	return (n >= INT_MIN && n <= INT_MAX);
 }
 
 static int	validate_input(int argc, char **args)
