@@ -6,7 +6,7 @@
 #    By: alisseye <alisseye@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/18 18:25:25 by alisseye          #+#    #+#              #
-#    Updated: 2025/03/02 14:01:32 by alisseye         ###   ########.fr        #
+#    Updated: 2025/03/02 14:05:18 by alisseye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
 $(NAME): $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) $(SRCS) -o $(NAME) -Llibft -lft -I includes -I libft
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -Llibft -lft -I includes -I libft
 
 $(LIBFT):
 	make -s -C libft bonus -I includes
