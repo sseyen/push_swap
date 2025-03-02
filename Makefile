@@ -6,7 +6,7 @@
 #    By: alisseye <alisseye@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/18 18:25:25 by alisseye          #+#    #+#              #
-#    Updated: 2025/03/01 18:33:38 by alisseye         ###   ########.fr        #
+#    Updated: 2025/03/02 14:01:32 by alisseye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,11 +32,11 @@ CFLAGS = -Wall -Wextra -Werror
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-$(NAME): $(LIBFT)
+$(NAME): $(OBJS) $(LIBFT)
 	$(CC) $(CFLAGS) $(SRCS) -o $(NAME) -Llibft -lft -I includes -I libft
 
 $(LIBFT):
-	make -C libft bonus -I includes
+	make -s -C libft bonus -I includes
 
 %.o: %.c
 	cc $(CFLAGS) -c $< -o $@ -I includes -I libft
@@ -45,11 +45,11 @@ all: $(NAME)
 
 clean:
 	rm -f $(OBJS)
-	make clean -C libft
+	make -s clean -C libft
 
 fclean: clean
 	rm -f $(NAME)
-	make fclean -C libft
+	make -s fclean -C libft
 
 re: fclean all
 
