@@ -6,7 +6,7 @@
 /*   By: alisseye <alisseye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 18:29:11 by alisseye          #+#    #+#             */
-/*   Updated: 2025/03/02 13:57:52 by alisseye         ###   ########.fr       */
+/*   Updated: 2025/03/05 20:19:37 by alisseye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,40 +32,6 @@ static t_list	*init_stack(int argc, char **args)
 		i--;
 	}
 	return (stack);
-}
-
-static int	is_int(int n)
-{
-	return (n >= INT_MIN && n <= INT_MAX);
-}
-
-static int	validate_input(int argc, char **args)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < argc && is_int(ft_atoi(args[i])))
-	{
-		j = 0;
-		while (args[i][j])
-		{
-			if (j == 0 && (args[i][j] == '-' || args[i][j] == '+'))
-				j++;
-			if (!ft_isdigit(args[i][j]))
-				return (0);
-			j++;
-		}
-		j = 0;
-		while (j < i)
-		{
-			if (ft_atoi(args[j]) == ft_atoi(args[i]))
-				return (0);
-			j++;
-		}
-		i++;
-	}
-	return (1);
 }
 
 char	**get_args(int argc, char **argv)

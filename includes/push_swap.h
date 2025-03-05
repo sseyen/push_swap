@@ -6,7 +6,7 @@
 /*   By: alisseye <alisseye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 18:30:15 by alisseye          #+#    #+#             */
-/*   Updated: 2025/03/01 18:33:14 by alisseye         ###   ########.fr       */
+/*   Updated: 2025/03/05 20:19:54 by alisseye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,9 @@ void		free_stacks(t_list **a, t_list **b);
 void		free_tab(char **split);
 int			get_size(char **argv);
 char		**copy_args(int argc, char **argv);
+
+// Utils input
+int			validate_input(int argc, char **args);
 
 // Utils sort
 void		move_to_top(t_list **stack_a);
