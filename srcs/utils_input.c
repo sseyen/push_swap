@@ -6,7 +6,7 @@
 /*   By: alisseye <alisseye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 20:18:34 by alisseye          #+#    #+#             */
-/*   Updated: 2025/03/05 20:29:17 by alisseye         ###   ########.fr       */
+/*   Updated: 2025/03/12 14:04:50 by alisseye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	validate_input(int argc, char **args)
 		i++;
 	}
 	if (!only_ints(argc, args))
-	return (0);
+		return (0);
 	if (!no_duplicates(argc, args))
 		return (0);
 	return (1);
